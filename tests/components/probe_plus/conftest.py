@@ -3,7 +3,7 @@
 from collections.abc import Generator
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from pyprobeplus.parser import ParserBase, ProbePlusData
+from pyprobeplus.parser import ProbePlusData, ProbeReading
 import pytest
 
 from homeassistant.components.probe_plus.const import DOMAIN
@@ -46,15 +46,10 @@ def mock_probe_plus() -> MagicMock:
         device = mock_device.return_value
         device.connected = True
         device.name = "FM210 aa:bb:cc:dd:ee:ff"
-        mock_state = ParserBase()
-        mock_state.state = ProbePlusData(
-            relay_battery=50,
-            probe_battery=50,
-            probe_temperature=25.0,
-            probe_rssi=200,
-            probe_voltage=3.7,
+        device.device_state = ProbePlusData(
+            probes=[ProbeReading(channel=0, temperature=25.0, rssi=200, voltage=3.7)],
             relay_status=1,
             relay_voltage=9.0,
+            relay_battery_thresholds=(3.87, 3.7, 3.6),
         )
-        device._device_state = mock_state
         yield device
