@@ -1,0 +1,85 @@
+{
+  "config": {
+    "step": {
+      "api_key": {
+        "data": {
+          "api_key": "API key"
+        },
+        "title": "API key authentication"
+      },
+      "credentials": {
+        "data": {
+          "password": "[%key:common::config_flow::data::password%]",
+          "username": "[%key:common::config_flow::data::username%]"
+        },
+        "title": "Username and password authentication"
+      },
+      "user": {
+        "data": {
+          "auth_method": "Authentication method",
+          "region": "Region"
+        },
+        "data_description": {
+          "auth_method": "Choose how to authenticate with Octopus Energy",
+          "region": "Select your account region"
+        },
+        "title": "Set up Octopus Energy"
+      },
+      "user_select_account": {
+        "data": {
+          "account_id": "Account"
+        },
+        "title": "Select an account"
+      }
+    },
+    "error": {
+      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]",
+      "no_accounts_found": "No accounts found"
+    }
+  },
+  "device": {
+    "meter": {
+      "name": "{fuel_type} Meter {direction}"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "latest_reading": {
+        "name": "Latest reading"
+      },
+      "current_cost": {
+        "name": "Current cost"
+      },
+      "current_tariff_rate": {
+        "name": "Current tariff rate"
+      },
+      "latest_quantity": {
+        "name": "Latest quantity"
+      },
+      "current_consumption": {
+        "name": "Current consumption"
+      },
+      "current_usage": {
+        "name": "Current usage"
+      },
+      "previous_consumption": {
+        "name": "Previous consumption"
+      },
+      "previous_cost": {
+        "name": "Previous cost"
+      }
+    }
+  },
+  "selector": {
+    "auth_method": {
+      "options": {
+        "api_key": "API key",
+        "credentials": "Username and password"
+      }
+    }
+  }
+}
