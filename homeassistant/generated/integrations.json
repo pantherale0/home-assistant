@@ -12670,6 +12670,15 @@
       "config_flow": true,
       "iot_class": "local_polling"
     },
+    "waveshare_serial": {
+      "name": "Waveshare Serial",
+      "integration_type": "device",
+      "categories": [
+        "diy_makers.boards_hardware"
+      ],
+      "config_flow": true,
+      "iot_class": "local_polling"
+    },
     "waze_travel_time": {
       "integration_type": "service",
       "categories": [

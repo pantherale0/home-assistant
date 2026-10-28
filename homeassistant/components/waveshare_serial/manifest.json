@@ -1,0 +1,14 @@
+{
+  "domain": "waveshare_serial",
+  "name": "Waveshare Serial",
+  "categories": ["diy_makers.boards_hardware"],
+  "codeowners": ["@pantherale0"],
+  "config_flow": true,
+  "dependencies": ["usb"],
+  "documentation": "https://www.home-assistant.io/integrations/waveshare_serial",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "loggers": ["pywaveshare"],
+  "quality_scale": "bronze",
+  "requirements": ["pywaveshare==0.1.1"]
+}

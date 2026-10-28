@@ -931,6 +931,7 @@ FLOWS = {
         "watts",
         "watttime",
         "wattwaechter",
+        "waveshare_serial",
         "waze_travel_time",
         "weatherflow",
         "weatherflow_cloud",

@@ -44,7 +44,7 @@ ACTIVE_CONFIG_ENTRY_STATES = (
 
 # Remote ports contributed by serial port scanners; a configured port missing
 # from the scan is absent, e.g. because the providing integration is offline
-SCANNED_PORT_SCHEMES = ("esphome-hass://",)
+SCANNED_PORT_SCHEMES = ("esphome-hass://", "waveshare-hass://")
 
 # Serial port URLs no scanner contributes; they can never be scanned, so a
 # claiming consumer is the only evidence such a port exists

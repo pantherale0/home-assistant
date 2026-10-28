@@ -1,0 +1,48 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "invalid_host": "[%key:common::config_flow::error::invalid_host%]",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "step": {
+      "user": {
+        "data": {
+          "config_mode": "Serial configuration protocol",
+          "host": "Host"
+        },
+        "data_description": {
+          "config_mode": "Select the protocol configured on the adapter for changing serial settings.",
+          "host": "The hostname or IP address of the Waveshare adapter."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "baud_rate": {
+        "name": "Baud rate"
+      },
+      "rx_bytes": {
+        "name": "Bytes received"
+      },
+      "tx_bytes": {
+        "name": "Bytes transmitted"
+      }
+    }
+  },
+  "selector": {
+    "config_mode": {
+      "options": {
+        "realcom": "ZLAN RealCom",
+        "rfc2217": "RFC 2217",
+        "udp_1092": "UDP management (port 1092)",
+        "waveshare_8byte": "Waveshare 8-byte",
+        "zlan_cmd_gen2": "ZLAN generation 2"
+      }
+    }
+  }
+}

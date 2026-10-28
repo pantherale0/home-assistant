@@ -1,0 +1,15 @@
+{
+  "entity": {
+    "sensor": {
+      "baud_rate": {
+        "default": "mdi:speedometer"
+      },
+      "rx_bytes": {
+        "default": "mdi:download-network"
+      },
+      "tx_bytes": {
+        "default": "mdi:upload-network"
+      }
+    }
+  }
+}

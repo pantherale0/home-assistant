@@ -2173,6 +2173,8 @@ CLAUDE.md @home-assistant/core
 /tests/components/watttime/ @bachya
 /homeassistant/components/wattwaechter/ @smartcircuits
 /tests/components/wattwaechter/ @smartcircuits
+/homeassistant/components/waveshare_serial/ @pantherale0
+/tests/components/waveshare_serial/ @pantherale0
 /homeassistant/components/waze_travel_time/ @eifinger
 /tests/components/waze_travel_time/ @eifinger
 /homeassistant/components/weather/ @home-assistant/core

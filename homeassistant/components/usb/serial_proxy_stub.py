@@ -1,4 +1,4 @@
-"""ESPHome serial proxy URI handler stub for serialx."""
+"""Serial proxy URI handler stubs for serialx."""
 
 from collections.abc import Buffer, Callable
 from typing import Unpack, override
@@ -9,16 +9,16 @@ from serialx.common import ConnectKwargs, PortSettingsUpdate
 from homeassistant.core import Event, callback
 from homeassistant.exceptions import ConfigEntryNotReady
 
-_NOT_READY = "ESPHome has not loaded yet"
-
 
 class HassESPHomeSerialStub(BaseSerial):
     """Serial stub that raises `ConfigEntryNotReady` until ESPHome itself loads."""
 
+    _not_ready = "ESPHome has not loaded yet"
+
     @override
     def _open(self) -> None:
         """Open a connection."""
-        raise ConfigEntryNotReady(_NOT_READY)
+        raise ConfigEntryNotReady(self._not_ready)
 
     @override
     def _reconfigure_port(self, update: PortSettingsUpdate) -> None:
@@ -80,13 +80,14 @@ class HassESPHomeSerialStubTransport(BaseSerialTransport):
     """Transport stub that raises `ConfigEntryNotReady` until ESPHome itself loads."""
 
     transport_name = "esphome-hass"
+    _not_ready = "ESPHome has not loaded yet"
 
     @override
     async def _connect(
         self, *, path: str | None = None, **kwargs: Unpack[ConnectKwargs]
     ) -> None:
         """Connect to the serial port."""
-        raise ConfigEntryNotReady(_NOT_READY)
+        raise ConfigEntryNotReady(self._not_ready)
 
     @override
     def close(self) -> None:
@@ -121,6 +122,19 @@ class HassESPHomeSerialStubTransport(BaseSerialTransport):
         """Apply a settings update to the open port."""
 
 
+class HassWaveshareSerialStub(HassESPHomeSerialStub):
+    """Serial stub used until Waveshare Serial loads."""
+
+    _not_ready = "Waveshare Serial has not loaded yet"
+
+
+class HassWaveshareSerialStubTransport(HassESPHomeSerialStubTransport):
+    """Transport stub used until Waveshare Serial loads."""
+
+    transport_name = "waveshare-hass"
+    _not_ready = "Waveshare Serial has not loaded yet"
+
+
 def register_serialx_transport() -> Callable[[Event], None]:
     """Register the stub URI handler."""
     unregister = register_uri_handler(
@@ -131,8 +145,17 @@ def register_serialx_transport() -> Callable[[Event], None]:
         weight=-1,  # We want the ESPHome integration transport to take precedence
     )
 
+    unregister_waveshare = register_uri_handler(
+        scheme="waveshare-hass://",
+        unique_scheme="waveshare-hass-usb://",
+        sync_cls=HassWaveshareSerialStub,
+        async_transport_cls=HassWaveshareSerialStubTransport,
+        weight=-1,
+    )
+
     @callback
     def _unregister(event: Event) -> None:
         unregister()
+        unregister_waveshare()
 
     return _unregister

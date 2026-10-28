@@ -2102,11 +2102,12 @@ async def test_list_serial_integrations_custom_override(
     assert "dsmr" in response["result"]
 
 
-async def test_serial_proxy_stub_sync(hass: HomeAssistant) -> None:
-    """Test ESPHome serial proxy stub."""
+@pytest.mark.parametrize("scheme", ["esphome-hass", "waveshare-hass"])
+async def test_serial_proxy_stub_sync(hass: HomeAssistant, scheme: str) -> None:
+    """Test serial proxy stubs before their integrations load."""
     assert await async_setup_component(hass, DOMAIN, {})
 
-    serial_cls = serial_for_url("esphome-hass-usb://192.0.2.1")
+    serial_cls = serial_for_url(f"{scheme}-usb://192.0.2.1")
     assert isinstance(serial_cls, HassESPHomeSerialStub)
 
     # Nothing actually opens, it just throws an error
@@ -2114,6 +2115,6 @@ async def test_serial_proxy_stub_sync(hass: HomeAssistant) -> None:
         await create_serial_connection(
             loop=asyncio.get_running_loop(),
             protocol_factory=asyncio.Protocol,
-            url="esphome-hass-usb://192.0.2.1",
+            url=f"{scheme}-usb://192.0.2.1",
             baudrate=115200,
         )
